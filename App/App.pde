@@ -2,19 +2,18 @@ private ScreenUtils screenUtils;
 
 void setup() {
   //fullScreen();
-  size(3508, 4961);
+  size(1100,778);
   screenUtils = new ScreenUtils();
   loadResources();
 }
 
 void draw() {
-  screenUtils.showScreen3();
-  //screenUtils.showScreen();
+  screenUtils.showScreen();
 }
      
 
 public void mouseClicked(){
- // screenUtils.nextScreen();
+  screenUtils.nextScreen();
 }
      
   
