@@ -33,8 +33,9 @@ private int currentScreen;
     background(green);
   }
 
-  private void showScreen3(){
-    background(pink);
+  public void showScreen3(){
+    image(screen3Background, 0, 0);
+    //background(screen3Background);
   }
   
 }
