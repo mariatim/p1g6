@@ -124,12 +124,6 @@ circle newCircle(){
     image(image, xCoordinates, yCoordinates);
   }
   
-  private void blink(){
-    show(picture[1]);
-    stop();
-    delay(3000);
-    show(picture[0]);
-  }
   }
   
   
