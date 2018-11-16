@@ -128,34 +128,72 @@ class button{
   
   public float[] avatarsYCoordinates;
   
+  public PImage menuScreen3;
+  
   int randomNumber;
 
   public class Avatar{
+    
   private PImage[] picture;
   private float xCoordinates;
   private float yCoordinates;
+  private String name; 
+  private boolean isMainAvatar;
   
-  public Avatar(PImage[] picture, float xCoordinates, float yCoordinates){
+  public Avatar(PImage[] picture, float xCoordinates, float yCoordinates, String name){
   this.picture = picture;
   this.xCoordinates = xCoordinates;
   this.yCoordinates = yCoordinates;
+  this.name = name; 
+  this.isMainAvatar = false;
   for (PImage image : picture){
     image.resize(300, 200);
   }
   }
   
   public void showAndBlink(){
-  
+  if (isMainAvatar){
+      manageMainAvatar();
+  }
   randomNumber = (int) random(0, 100);
   if (randomNumber < 10){
     show(picture[1]);
   } else {
     show(picture[0]);
   }
+    showName();
   }
   
   private void show(PImage image){
     image(image, xCoordinates, yCoordinates);
+  }
+  
+  private void showName(){
+    textSize(20);
+    fill(white);
+    text(name, xCoordinates + 90, yCoordinates + 30); //+90 because the picture is not cropped
+  }
+  
+  private void makeMainAvatar(){
+    isMainAvatar = true;
+  }
+  
+  private void manageMainAvatar(){
+    stroke(green);
+    fill(green);
+    ellipse(getCenterCoordinates()[0], getCenterCoordinates()[1], 120, 120);
+    if (overCircle(getCenterCoordinates()[0], getCenterCoordinates()[1], 120)){
+       showMainCharacterMenu();
+    }
+  }
+  
+  private void showMainCharacterMenu(){
+    println("OVER!!!");
+   image(menuScreen3, getCenterCoordinates()[0] - 75, getCenterCoordinates()[1] + 40);
+  }
+  
+  private float[] getCenterCoordinates(){
+    return new float[]{xCoordinates + 140, yCoordinates + 100};
   }
   
   }
@@ -218,14 +256,21 @@ public void loadResources(){
     loadImage("pics/screen3/avatars/A4_2.png")
   };
   
-  avatarsXCoordinates = new float[] {50, 150, 300, 500};
+  menuScreen3 = loadImage("pics/screen3/rect.png");
+  menuScreen3.resize(150, 300);
   
-  avatarsYCoordinates = new float[] {200, 200, 200, 100};
+  //Avatar 3 is the user's avatar
+  avatarsXCoordinates = new float[] {2 * width/8, 3 * width/8, 6 * width/8, 4 * width/8};
+  
+  avatarsYCoordinates = new float[] {height/16, height/16, height/4, height/16};
   
   avatars = new Avatar[] {
-                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0]), 
-                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1]), 
-                new Avatar(avatar3, avatarsXCoordinates[2], avatarsYCoordinates[2]),
-                new Avatar(avatar4, avatarsXCoordinates[3], avatarsYCoordinates[3])
+                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0], "FirstName"), 
+                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1], "SecondName"), 
+                new Avatar(avatar3, avatarsXCoordinates[2], avatarsYCoordinates[2], "YourName"),
+                new Avatar(avatar4, avatarsXCoordinates[3], avatarsYCoordinates[3], "ThirdName")
               };
+              
+  avatars[2].makeMainAvatar();
+  
 }

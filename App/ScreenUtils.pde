@@ -6,6 +6,7 @@ private int currentScreen;
   }
   
   public void showScreen(){
+  frameRate(20);
   if (currentScreen == 1){
   showScreen1();
   } else if (currentScreen == 2){
@@ -80,7 +81,7 @@ private int currentScreen;
     for (Avatar avatar: avatars){
       avatar.showAndBlink();
     }
-    //background(screen3Background);
   }
+ 
   
 }
