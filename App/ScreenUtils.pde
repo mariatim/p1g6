@@ -75,7 +75,11 @@ private int currentScreen;
   }
 
   public void showScreen3(){
+    frameRate(4);
     image(screen3Background, 0, 0);
+    for (Avatar avatar: avatars){
+      avatar.showAndBlink();
+    }
     //background(screen3Background);
   }
   

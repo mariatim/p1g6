@@ -88,6 +88,55 @@ circle newCircle(){
   
   public PImage[] avatar4;
   
+  public Avatar[] avatars;
+  
+  public float[] avatarsXCoordinates;
+  
+  public float[] avatarsYCoordinates;
+  
+  int randomNumber;
+
+  public class Avatar{
+  private PImage[] picture;
+  private float xCoordinates;
+  private float yCoordinates;
+  
+  public Avatar(PImage[] picture, float xCoordinates, float yCoordinates){
+  this.picture = picture;
+  this.xCoordinates = xCoordinates;
+  this.yCoordinates = yCoordinates;
+  for (PImage image : picture){
+    image.resize(300, 200);
+  }
+  }
+  
+  public void showAndBlink(){
+  
+  randomNumber = (int) random(0, 100);
+  if (randomNumber < 10){
+    show(picture[1]);
+  } else {
+    show(picture[0]);
+  }
+  }
+  
+  private void show(PImage image){
+    image(image, xCoordinates, yCoordinates);
+  }
+  
+  private void blink(){
+    show(picture[1]);
+    stop();
+    delay(3000);
+    show(picture[0]);
+  }
+  }
+  
+  
+/**
+## Load the resources ##
+**/
+  
 public void loadResources(){
 /**
 ## Screen 1 ##
@@ -140,4 +189,15 @@ public void loadResources(){
     loadImage("pics/screen3/avatars/A4_1.png"),
     loadImage("pics/screen3/avatars/A4_2.png")
   };
+  
+  avatarsXCoordinates = new float[] {50, 150, 300, 500};
+  
+  avatarsYCoordinates = new float[] {200, 200, 200, 100};
+  
+  avatars = new Avatar[] {
+                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0]), 
+                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1]), 
+                new Avatar(avatar3, avatarsXCoordinates[2], avatarsYCoordinates[2]),
+                new Avatar(avatar4, avatarsXCoordinates[3], avatarsYCoordinates[3])
+              };
 }
