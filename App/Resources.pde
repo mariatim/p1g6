@@ -41,15 +41,15 @@ return(x+r>width||x-r<0||y+r>height||y-r<0);//if any of these statements is fulf
 //makes a function which contains the same as the class for circle
 circle newCircle(){
   int r=int(random(0,spots.size())); //makes the radius of the circles random, between 0 and within the parameters set in the top, which is it should be within the pixels of the picture
-  PVector spot=spots.get(r);
+  PVector spot=spots.get(r); //get a spot out of the arraylist spot
   
   float x= spot.x;  //x-position within the pixels of the picture                //random(width);
   float y= spot.y;  //y-postion within the pixels of the picture                //random(height);
   
-  boolean valid=true; //makes the circles valid CHEK UP ON
+  boolean valid=true; //makes the circles valid, to use to make sure a circle is not made inside another circle
   for(circle c: circles){
-  float d= dist(x,y,c.x,c.y); //meassures the distance of the x and y position between the circle and the picture
-  if(d<c.r){ //if the distance is smaller than the radius of the circle valid is set to false
+  float d= dist(x,y,c.x,c.y); //the distance between the circles so they are not touching  meassures the distance of the x and y position between the circle and the picture
+  if(d<c.r){ //if the distance is smaller than the radius of the circle valid is set to false, so it won't make a circle inside a circle
     valid=false;
     break;
   }
@@ -77,7 +77,7 @@ class button{
   
   void show(){
     noFill();
-    stroke(#E8E45B);
+    stroke(yellow);
     strokeWeight(15);
   ellipse(x,y,r,r);
   textSize(15);
@@ -208,13 +208,14 @@ public void loadResources(){
 ## Screen 1 ##
 **/
  spots= new ArrayList<PVector>();
- text=loadImage("pics/screen1/p1_text2.png");
+ text=loadImage("pics/screen1/p1_text2.png"); //sets in the picture, is is not shown, but the pixels are read, so the circles know where to go
  text.loadPixels();//to read the pixels of the image
- for(int x=0; x<text.width;x++){
- for(int y=0;y<text.height;y++){
- int index=x+y*text.width;
- color c=text.pixels[index];
- float b=brightness(c);
+  //a loop that looks at the pixels of the picture
+ for(int x=0; x<text.width;x++){//to make it loop inside the pictures pixels on the x-position
+ for(int y=0;y<text.height;y++){//to make it loop inside the pictures pixels on the y-posiiton
+ int index=x+y*text.width;//the column + the row times how wide it is 
+ color c=text.pixels[index];//registering the color within the parameters stated above
+ float b=brightness(c);//extracts the brightness from the pixels in the picture
  if(b>1){
  spots.add(new PVector(x,y));
  }
