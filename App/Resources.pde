@@ -2,14 +2,14 @@
 ## Screen 1 ##
 **/
 
-ArrayList<circle> circles;
+ArrayList<circle> circles; //uses array list since, we don't know how long the array should be
 ArrayList<PVector> spots;//to make sure the circles have some where to go, PVector stores x and y spots
-PImage text;
+PImage text; //calls variable which will contain a picture
 
 class circle{
-float x;
-float y;
-float r;
+float x; //x-position for the ellipse
+float y; //y-position for the ellipse
+float r; //diameter of the ellipse
 
 boolean growing=true;
 
@@ -21,42 +21,42 @@ r=1;
 
 void grow(){
    
-if(growing){
+if(growing){ //if the growing = true then the circle expands
 r=r+1; //makes the radius of the circle grow by 1
 }
 }
 
 boolean edges(){
-return(x+r>width||x-r<0||y+r>height||y-r<0);//if any of these are true it will return 
+return(x+r>width||x-r<0||y+r>height||y-r<0);//if any of these statements is fulfilled it will return true and stop growing, since the boolean is false. 
 
 }
   
-  void show(){
+  void show(){ //draws the ellipse
     stroke(255);
     noFill();
   ellipse(x,y,r*2,r*2);
   }
   
 }
-
+//makes a function which contains the same as the class for circle
 circle newCircle(){
-  int r=int(random(0,spots.size()));
+  int r=int(random(0,spots.size())); //makes the radius of the circles random, between 0 and within the parameters set in the top, which is it should be within the pixels of the picture
   PVector spot=spots.get(r);
   
-  float x= spot.x;                 //random(width);
-  float y= spot.y;                 //random(height);
+  float x= spot.x;  //x-position within the pixels of the picture                //random(width);
+  float y= spot.y;  //y-postion within the pixels of the picture                //random(height);
   
-  boolean valid=true;
+  boolean valid=true; //makes the circles valid CHEK UP ON
   for(circle c: circles){
-  float d= dist(x,y,c.x,c.y);
-  if(d<c.r){
+  float d= dist(x,y,c.x,c.y); //meassures the distance of the x and y position between the circle and the picture
+  if(d<c.r){ //if the distance is smaller than the radius of the circle valid is set to false
     valid=false;
     break;
   }
     
   }
   
-  if(valid){
+  if(valid){ // if the circle is valid then is will make a new circle
     return new circle(x,y); //find new places for circle if not then null(make no circles)
     
   //circles.add(new circle(x,y));
@@ -64,6 +64,39 @@ circle newCircle(){
   return null;  
   }
 }
+class button{
+  boolean click;
+  int x=width/2;
+  int y=height/2+200;
+  int r=100;
+  
+ button(){
+   
+ }
+  
+  
+  void show(){
+    noFill();
+    stroke(#E8E45B);
+    strokeWeight(15);
+  ellipse(x,y,r,r);
+  textSize(15);
+  text("click here",x-32,y);
+  }
+  
+  void pressed(){
+  if(mouseX==x+r/2||mouseY==y+r/2&&mousePressed==true){
+    //if(mousePressed==true){
+    rect(x,y,width/2,height/2);
+    //}
+  }
+  }
+  /*void mouseClicked(){
+  if(dist(mouseX,mouseY,x,y) <= r/2&&click == false){
+    click=true;
+   
+  }*/
+  
 
 /**
 ## Screen 2 ##
