@@ -14,12 +14,16 @@ void draw() {
 public void mouseClicked(){
   
   if (screenUtils.getCurrentScreen()==2){
-      for(int i = 0; i < buttons.length; i++){
-      buttons[i].click(i);
+     for(int i = 0; i < buttons.length; i++){
+         if (buttons[i].isMouseOnButton()){
+             showPopUpNumber = buttons[i].click();
+         }
       }  
   } else{
-      screenUtils.nextScreen();
+     screenUtils.nextScreen();
   }
+    
+  
 }
      
   

@@ -78,10 +78,11 @@ private int currentScreen;
   
   private void showScreen2(){
   background(green);
+  showPopUp();
   for(int i = 0; i < buttons.length; i++){
     buttons[i].show();
-  }  
-  }
+  }    
+}
 
   public void showScreen3(){
     frameRate(4);
