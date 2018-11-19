@@ -140,7 +140,7 @@ public void show(){
   rectMode(CORNER);
   stroke(yellow);
   manageHover();
-  rect(xCoordinates, yCoordinates, size, size);
+  rect(xCoordinates, yCoordinates, size, size, 20);
   showText();
 }
 
@@ -189,7 +189,7 @@ public void showPopUp(){
     stroke(yellow);
     fill(blue);
     rectMode(CENTER);
-    rect(width/2, height/2, width/2, height/2);
+    rect(width/2, height/2, width/2, height/2, 20);
     fill(purple);
     textSize(15);
     textAlign(CENTER, CENTER);
