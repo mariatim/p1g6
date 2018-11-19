@@ -6,6 +6,7 @@ private int currentScreen;
   }
   
   public void showScreen(){
+  frameRate(20);
   if (currentScreen == 1){
   showScreen1();
   } else if (currentScreen == 2){
@@ -25,8 +26,13 @@ private int currentScreen;
   showScreen();
   }
   
+  public int getCurrentScreen(){
+    return currentScreen;
+  }
+  
   private void showScreen1(){
    background(blue);
+   strokeWeight(1);
     
   int total=25;//make 25 circles every frame
   int count=0;
@@ -69,11 +75,16 @@ private int currentScreen;
   c.show();//makes the circle display
   c.grow();//makes the circle grow
   }
+  
   }
   
   private void showScreen2(){
-    background(green);
-  }
+  background(green);
+  showPopUp();
+  for(int i = 0; i < buttons.length; i++){
+    buttons[i].show();
+  }    
+}
 
   public void showScreen3(){
     frameRate(4);
@@ -81,7 +92,7 @@ private int currentScreen;
     for (Avatar avatar: avatars){
       avatar.showAndBlink();
     }
-    //background(screen3Background);
   }
+ 
   
 }
