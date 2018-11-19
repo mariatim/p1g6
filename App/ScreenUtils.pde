@@ -28,7 +28,7 @@ private int currentScreen;
   private void showScreen1(){
    background(blue);
     
-  int total=10;//make 10 circles every frame
+  int total=25;//make 25 circles every frame
   int count=0;
   int attempts=0;
   //to make it find 10 new circles every frame

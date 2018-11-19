@@ -43,13 +43,13 @@ circle newCircle(){
   int r=int(random(0,spots.size())); //makes the radius of the circles random, between 0 and within the parameters set in the top, which is it should be within the pixels of the picture
   PVector spot=spots.get(r); //get a spot out of the arraylist spot
   
-  float x= spot.x;  //x-position within the pixels of the picture                //random(width);
-  float y= spot.y;  //y-postion within the pixels of the picture                //random(height);
+  float x= spot.x;               //x-position within the pixels of the picture                //random(width);
+  float y= spot.y;               //y-postion within the pixels of the picture                //random(height);
   
-  boolean valid=true; //makes the circles valid, to use to make sure a circle is not made inside another circle
+  boolean valid=true;           //makes the circles valid, to use to make sure a circle is not made inside another circle
   for(circle c: circles){
-  float d= dist(x,y,c.x,c.y); //the distance between the circles so they are not touching  meassures the distance of the x and y position between the circle and the picture
-  if(d<c.r){ //if the distance is smaller than the radius of the circle valid is set to false, so it won't make a circle inside a circle
+  float d= dist(x,y,c.x,c.y);  //the distance between the circles so they are not touching  meassures the distance of the x and y position between the circle and the picture
+  if(d<c.r){                   //if the distance is smaller than the radius of the circle valid is set to false, so it won't make a circle inside a circle
     valid=false;
     break;
   }
@@ -170,7 +170,7 @@ public void loadResources(){
 ## Screen 1 ##
 **/
  spots= new ArrayList<PVector>();
- text=loadImage("pics/screen1/p1_text2.png"); //sets in the picture, is is not shown, but the pixels are read, so the circles know where to go
+ text=loadImage("pics/screen1/p1_text3.png"); //sets in the picture, is is not shown, but the pixels are read, so the circles know where to go
  text.loadPixels();//to read the pixels of the image
   //a loop that looks at the pixels of the picture
  for(int x=0; x<text.width;x++){//to make it loop inside the pictures pixels on the x-position
