@@ -136,13 +136,16 @@ public Button2(float xCoordinates, float yCoordinates, String text, int id){
 }
 
 public void show(){
+  strokeWeight(3);
+  rectMode(CORNER);
+  stroke(yellow);
   manageHover();
   rect(xCoordinates, yCoordinates, size, size);
   showText();
 }
 
 private void showText(){
-  fill(pink);
+  fill(purple);
   textSize(15);
   textAlign(CENTER, CENTER);
   text(buttonText, xCoordinates, yCoordinates, size, size);
@@ -157,16 +160,16 @@ if (isMouseOnButton()) {
 }
 
 
-public int click(){
-  println("here");
+public int click(int currentPopUp){
   if (isMouseOnButton()) {
+    if (id == numberOfButtons - 1){ 
+      screenUtils.nextScreen();
+    }
     if (id < popUpTexts.length){ 
-      println("hhhhhhhhhhhhhhhhhhhhhhhh");
-      println(id);
-       return id;
+      return (currentPopUp == id)? -1 : id;  
     }
   } 
-  return 0;
+  return -1;
 }
 
 private boolean isMouseOnButton(){
@@ -181,13 +184,16 @@ private boolean isMouseOnButton(){
 }
 
 public void showPopUp(){
-  if (showPopUpNumber != 0){
+  if (showPopUpNumber != -1){
+    strokeWeight(3);
+    stroke(yellow);
     fill(blue);
-    rect(width/32, height/32, width/2, height/2);
-    fill(pink);
+    rectMode(CENTER);
+    rect(width/2, height/2, width/2, height/2);
+    fill(purple);
     textSize(15);
     textAlign(CENTER, CENTER);
-    text(popUpTexts[showPopUpNumber], width/32, height/32, width/2, height/2);
+    text(popUpTexts[showPopUpNumber], width/2, height/2, width/2, height/2);
   }
 }
 
@@ -330,24 +336,20 @@ public void loadResources(){
 ## Screen 2 ##
 **/
 
-  numberOfButtons = 9;
+  numberOfButtons = 5;
   rectSize = 90;
-  buttons = new Button2[9];
-  showPopUpNumber = 0;
+  buttons = new Button2[5];
+  showPopUpNumber = -1;
   
   String[] buttonTexts = {
     "Social Anxiety Disorder",
     "AR",
     "Biblio therapy",
     "Our vision",
-    "---",
-    "---",
-    "---",
-    "---",
     "Demo"
   };
   
-  int numberToAdd = -4; 
+  int numberToAdd = -2; 
   for(int i = 0; i < numberOfButtons; i++){
     int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
     int yCoordinates = height - rectSize;

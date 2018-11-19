@@ -32,6 +32,7 @@ private int currentScreen;
   
   private void showScreen1(){
    background(blue);
+   strokeWeight(1);
     
   int total=10;//make 10 circles every frame
   int count=0;
@@ -74,6 +75,7 @@ private int currentScreen;
   c.show();//makes the circle display
   c.grow();//makes the circle grow
   }
+  
   }
   
   private void showScreen2(){
