@@ -130,6 +130,8 @@ class button{
   
   public PImage menuScreen3;
   
+  public PImage commentBox1; 
+  
   int randomNumber;
 
   public class Avatar{
@@ -152,9 +154,7 @@ class button{
   }
   
   public void showAndBlink(){
-  if (isMainAvatar){
-      manageMainAvatar();
-  }
+  manageMainAvatar();
   randomNumber = (int) random(0, 100);
   if (randomNumber < 10){
     show(picture[1]);
@@ -171,7 +171,7 @@ class button{
   private void showName(){
     textSize(20);
     fill(white);
-    text(name, xCoordinates + 90, yCoordinates + 30); //+90 because the picture is not cropped
+    text(name, xCoordinates + 110, yCoordinates + 30); //+90 because the picture is not cropped
   }
   
   private void makeMainAvatar(){
@@ -179,17 +179,32 @@ class button{
   }
   
   private void manageMainAvatar(){
+  if (isMainAvatar){
     stroke(green);
     fill(green);
     ellipse(getCenterCoordinates()[0], getCenterCoordinates()[1], 120, 120);
     if (overCircle(getCenterCoordinates()[0], getCenterCoordinates()[1], 120)){
        showMainCharacterMenu();
     }
+  } else{
+    strokeWeight(3);
+    stroke(green);
+    noFill();
+    ellipse(getCenterCoordinates()[0], getCenterCoordinates()[1], 120, 120);
+    if (overCircle(getCenterCoordinates()[0], getCenterCoordinates()[1], 120)){
+       showComment();
+    }
+  }
+   
   }
   
   private void showMainCharacterMenu(){
-    println("OVER!!!");
    image(menuScreen3, getCenterCoordinates()[0] - 75, getCenterCoordinates()[1] + 40);
+  }
+  
+  private void showComment(){
+    println("OVER!!!");
+    image(picture[2], width/32, 6*height/16);
   }
   
   private float[] getCenterCoordinates(){
@@ -239,12 +254,14 @@ public void loadResources(){
   //avatars
   avatar1 = new PImage[]{
     loadImage("pics/screen3/avatars/A1_1.png"),
-    loadImage("pics/screen3/avatars/A1_2.png")
+    loadImage("pics/screen3/avatars/A1_2.png"),
+    loadImage("pics/screen3/commentBox1.png")
   };
   
   avatar2 = new PImage[]{
     loadImage("pics/screen3/avatars/A2_1.png"),
-    loadImage("pics/screen3/avatars/A2_2.png")
+    loadImage("pics/screen3/avatars/A2_2.png"),
+    loadImage("pics/screen3/commentBox1.png")
   };
   
   avatar3 = new PImage[]{
@@ -254,11 +271,13 @@ public void loadResources(){
   
   avatar4 = new PImage[]{
     loadImage("pics/screen3/avatars/A4_1.png"),
-    loadImage("pics/screen3/avatars/A4_2.png")
+    loadImage("pics/screen3/avatars/A4_2.png"),
+    loadImage("pics/screen3/commentBox1.png")
   };
   
   menuScreen3 = loadImage("pics/screen3/rect.png");
   menuScreen3.resize(150, 300);
+ 
   
   //Avatar 3 is the user's avatar
   avatarsXCoordinates = new float[] {2 * width/8, 3 * width/8, 6 * width/8, 4 * width/8};
@@ -266,10 +285,10 @@ public void loadResources(){
   avatarsYCoordinates = new float[] {height/16, height/16, height/4, height/16};
   
   avatars = new Avatar[] {
-                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0], "FirstName"), 
-                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1], "SecondName"), 
-                new Avatar(avatar3, avatarsXCoordinates[2], avatarsYCoordinates[2], "YourName"),
-                new Avatar(avatar4, avatarsXCoordinates[3], avatarsYCoordinates[3], "ThirdName")
+                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0], "Lucas"), 
+                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1], "Emilie"), 
+                new Avatar(avatar3, avatarsXCoordinates[2], avatarsYCoordinates[2], "Milla"),
+                new Avatar(avatar4, avatarsXCoordinates[3], avatarsYCoordinates[3], "Rasmus")
               };
               
   avatars[2].makeMainAvatar();
