@@ -26,6 +26,10 @@ private int currentScreen;
   showScreen();
   }
   
+  public int getCurrentScreen(){
+    return currentScreen;
+  }
+  
   private void showScreen1(){
    background(blue);
     
@@ -73,7 +77,10 @@ private int currentScreen;
   }
   
   private void showScreen2(){
-    background(green);
+  background(green);
+  for(int i = 0; i < buttons.length; i++){
+    buttons[i].show();
+  }  
   }
 
   public void showScreen3(){

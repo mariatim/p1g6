@@ -103,6 +103,69 @@ class button{
 ## Screen 2 ##
 **/
 
+public Button2[] buttons; 
+public int numberOfButtons;
+public int rectSize; 
+public String[] popUpTexts;
+
+public class Button2{
+private float xCoordinates;
+private float yCoordinates;
+private int size;
+private color[] buttonColor;
+private boolean clicked = false;
+private String buttonText;
+
+public Button2(float xCoordinates, float yCoordinates, String text){
+  this.xCoordinates = xCoordinates; 
+  this.yCoordinates = yCoordinates; 
+  size = 90;
+  buttonText = text;
+  buttonColor = new color[]{
+    color(blue),
+    color(yellow)
+  };
+}
+
+public void show(){
+  manageHover();
+  rect(xCoordinates, yCoordinates, size, size);
+  showText();
+}
+
+private void showText(){
+  fill(pink);
+  textSize(15);
+  textAlign(CENTER, CENTER);
+  text(buttonText, xCoordinates, yCoordinates, size, size);
+}
+
+private void manageHover(){
+if (isMouseOnButton()) {
+    fill(buttonColor[1]);
+  } else{
+    fill(buttonColor[0]);
+  }
+}
+
+public void click(int i){
+  if (isMouseOnButton()) {
+    System.out.format("I clicked: %d; \n", i);
+    clicked = true;
+  } 
+}
+
+private boolean isMouseOnButton(){
+ if ((mouseX >= xCoordinates) && (mouseX <= (xCoordinates + size)) && 
+      (mouseY >= yCoordinates) && (mouseY <= yCoordinates+height)) {
+      return true;
+      } else {
+      return false; 
+      }
+}
+  
+}
+
 
 /**
 ## Screen 3 ##
@@ -241,6 +304,39 @@ public void loadResources(){
 /**
 ## Screen 2 ##
 **/
+
+numberOfButtons = 9;
+  rectSize = 90;
+  buttons = new Button2[9];
+  
+  String[] buttonTexts = {
+    "Social Anxiety Disorder",
+    "AR",
+    "Biblio therapy",
+    "Our vision",
+    "---",
+    "---",
+    "---",
+    "---",
+    "Demo"
+  };
+  
+  int numberToAdd = -4; 
+  for(int i = 0; i < numberOfButtons; i++){
+    int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
+    int yCoordinates = height - rectSize;
+    buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i]);
+    numberToAdd++; 
+  }
+  
+  popUpTexts = new String[]{
+  "Social anxiety disorder \n Social anxiety disorder is a huge problem for the individual. Anxieties in general, including phobias, can become crippling handicaps if not properly treated, and some suffer from these irrational fears all of their life. Social anxiety disorder relates to the suffers' fear of other people, or other people's reactions to them, in a social capacity. There are a long list of symptoms ranging from physical discomforts to panic attacks.",
+  "AR \n AR is short for Augmented Reality, and is the idea of layering an image of something unreal over a real image in real time. An example of an AR game would be Pokémon GO, in which the players physically walk around, get alerted to Pokémon nearby, and can see an animated Pokémon standing nearby them through their phone's camera, after which they can catch it. Another example could is MagicLeap, a pair of AR glasses, that let you see the real world through them, but overlayed with interactive elements. These come with a small remote, so you can doodle in AR while seeing the real world behind your doodle.",
+  "Bibliotherapy \n Bibliotherapy is a therapy form that relies on books. The idea is for the patient to be guided by a therapist to find relatable characters and passages in books pertaining to their issues and through this learn to cope with their own situation. An example would be, that if you are feeling socially awkward, you can read about a character, who is also socially awkward, but overcomes it in the book, and thereby learn from their experiences, or get enlightened about the fact, that there is a chance to get better.",
+  "Our vision \n Our vision is to combine AR and bibliotherapy. We want to make a tool, which relies on AR glasses and which allows patients to take notes about meaningful passages on their own, which could be shared with others during a therapist guided AR therapy session. Our hope is, that patients with social anxiety will benefit from bibliotherapy presented in an AR setting. This would give them a measure of anonymity, they would not have to leave their homes and they would hopefully feel more safe in this setting, but they would still be participating in therapist guided group therapy, centered around books, and therefore give them positive experiences with each other, as well as learn from the books they read."
+  };
+
+
 
 /**
 ## Screen 3 ##

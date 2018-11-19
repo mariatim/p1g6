@@ -11,9 +11,15 @@ void draw() {
   screenUtils.showScreen();
 }
      
-
 public void mouseClicked(){
-  screenUtils.nextScreen();
+  
+  if (screenUtils.getCurrentScreen()==2){
+      for(int i = 0; i < buttons.length; i++){
+      buttons[i].click(i);
+      }  
+  } else{
+      screenUtils.nextScreen();
+  }
 }
      
   
