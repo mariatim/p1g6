@@ -24,6 +24,12 @@ public void mouseClicked(){
       if (!buttonClicked) {
         showPopUpNumber = -1;
       }
+  } else if (screenUtils.getCurrentScreen()==3){
+    if(screen3buttons[0].isMouseOnButton()){
+       screenUtils.previousScreen();
+    } else if(screen3buttons[1].isMouseOnButton()){
+       screenUtils.nextScreen();
+    }
   } else{
      screenUtils.nextScreen();
   }

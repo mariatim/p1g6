@@ -92,6 +92,9 @@ private int currentScreen;
     for (Avatar avatar: avatars){
       avatar.showAndBlink();
     }
+    for (Button2 button : screen3buttons){
+      button.show();
+    }  
   }
  
   

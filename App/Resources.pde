@@ -226,7 +226,9 @@ public void showPopUp(){
   
   public PImage commentBox1; 
   
-  int randomNumber;
+  public int randomNumber;
+  
+  public Button2[] screen3buttons;
 
   public class Avatar{
     
@@ -409,4 +411,8 @@ public void loadResources(){
               
   avatars[2].makeMainAvatar();
   
+    screen3buttons = new Button2[2];
+    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 0);
+    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 1);
+   
 }
