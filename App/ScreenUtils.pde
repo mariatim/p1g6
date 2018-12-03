@@ -34,9 +34,9 @@ private int currentScreen;
    background(blue);
    strokeWeight(1);
     
-  int total=25;//make 25 circles every frame
+  int total=50;//make 50 circles every frame
   int count=0;
-  int attempts=0;
+  
   //to make it find 10 new circles every frame
  while(count<total){//while the count of circles is smaller than the total number of circles per frame it will make a new circle, if the statements are true
  circle newc = newCircle();//makes the new circle
@@ -46,7 +46,7 @@ private int currentScreen;
   }
   //to not make it go in an infinte loop to fin new spots, there is made an if statement to stop the loop, when it can't find new circles after 1000 tries it stops making circles
   if(attempts>1000){ //when it takes 1000 tries and can't find any where to put 10 circles pr. frame it stops
-  noLoop();
+  //noLoop();
   
   println("FINISHED");
   break;

@@ -7,6 +7,8 @@ ArrayList<circle> circles; //uses array list since, we don't know how long the a
 ArrayList<PVector> spots;//to make sure the circles have some where to go, PVector stores x and y spots
 PImage text; //calls variable which will contain a picture
 
+int attempts=0;
+
 class circle{
 float x; //x-position for the ellipse
 float y; //y-position for the ellipse
@@ -41,6 +43,7 @@ return(x+r>width||x-r<0||y+r>height||y-r<0);//if any of these statements is fulf
 }
 //makes a function which contains the same as the class for circle
 circle newCircle(){
+  
   int r=int(random(0,spots.size())); //makes the radius of the circles random, between 0 and within the parameters set in the top, which is it should be within the pixels of the picture
   PVector spot=spots.get(r); //get a spot out of the arraylist spot
   
@@ -62,6 +65,7 @@ circle newCircle(){
     
   //circles.add(new circle(x,y));
   } else{
+    attempts+=1;
   return null;  
   }
 }
