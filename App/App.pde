@@ -1,7 +1,8 @@
+import processing.video.Movie;
+
 private ScreenUtils screenUtils;
 
 void setup() {
-  //fullScreen();
   size(1100,778);
   screenUtils = new ScreenUtils();
   loadResources();

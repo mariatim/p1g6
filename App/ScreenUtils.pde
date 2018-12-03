@@ -79,7 +79,9 @@ private int currentScreen;
   }
   
   private void showScreen2(){
-  background(green);
+  background(0);
+  video.read();
+  image(video, 0, 0, width, height);
   showPopUp();
   for(int i = 0; i < buttons.length; i++){
     buttons[i].show();

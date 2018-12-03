@@ -1,3 +1,4 @@
+
 /**
 ## Screen 1 ##
 **/
@@ -113,6 +114,7 @@ private final String[] popUpTexts = {
   "Bibliotherapy \n Bibliotherapy is a therapy form that relies on books. The idea is for the patient to be guided by a therapist to find relatable characters and passages in books pertaining to their issues and through this learn to cope with their own situation. An example would be, that if you are feeling socially awkward, you can read about a character, who is also socially awkward, but overcomes it in the book, and thereby learn from their experiences, or get enlightened about the fact, that there is a chance to get better.",
   "Our vision \n Our vision is to combine AR and bibliotherapy. We want to make a tool, which relies on AR glasses and which allows patients to take notes about meaningful passages on their own, which could be shared with others during a therapist guided AR therapy session. Our hope is, that patients with social anxiety will benefit from bibliotherapy presented in an AR setting. This would give them a measure of anonymity, they would not have to leave their homes and they would hopefully feel more safe in this setting, but they would still be participating in therapist guided group therapy, centered around books, and therefore give them positive experiences with each other, as well as learn from the books they read."
   };
+private Movie video;
 
 public class Button2{
 private float xCoordinates;
@@ -121,7 +123,6 @@ private int size;
 private color[] buttonColor;
 private String buttonText;
 private int id;
-
 
 public Button2(float xCoordinates, float yCoordinates, String text, int id){
   this.xCoordinates = xCoordinates; 
@@ -338,6 +339,11 @@ public void loadResources(){
 ## Screen 2 ##
 **/
 
+  video = new Movie(this, "mov.mov");
+ // video = new Movie(this, dataPath("pics/screen2/mov.mov"));
+  video.loop();
+  video.volume(0);
+
   numberOfButtons = 5;
   rectSize = 90;
   buttons = new Button2[5];
@@ -358,6 +364,7 @@ public void loadResources(){
     buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i);
     numberToAdd++; 
   }
+ 
 
 
 /**
