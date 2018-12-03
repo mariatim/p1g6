@@ -187,11 +187,11 @@ private boolean isMouseOnButton(){
 public void showPopUp(){
   if (showPopUpNumber != -1){
     strokeWeight(3);
-    stroke(yellow);
-    fill(blue);
+    stroke(white);
+    fill(white, 50);
     rectMode(CENTER);
     rect(width/2, height/2, width/2, height/2, 20);
-    fill(purple);
+    fill(white);
     textSize(15);
     textAlign(CENTER, CENTER);
     text(popUpTexts[showPopUpNumber], width/2, height/2, width/2, height/2);
