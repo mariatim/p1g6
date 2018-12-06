@@ -128,16 +128,24 @@ private color[] buttonColor;
 private String buttonText;
 private int id;
 
-public Button2(float xCoordinates, float yCoordinates, String text, int id){
+public Button2(float xCoordinates, float yCoordinates, String text, int id, boolean revertedColors){
   this.xCoordinates = xCoordinates; 
   this.yCoordinates = yCoordinates; 
   size = 90;
   buttonText = text;
   this.id = id; 
-  buttonColor = new color[]{
-    color(blue),
-    color(yellow)
-  };
+  if (revertedColors){
+    buttonColor = new color[]{
+      color(yellow),
+      color(blue)
+    };
+  }else{
+    buttonColor = new color[]{
+      color(blue),
+      color(yellow)
+    };
+  }
+  
 }
 
 public void show(){
@@ -367,13 +375,13 @@ public void loadResources(){
 
   for(int i = 0; i < numberOfButtons-1; i++){
     xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-    buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i);
+    buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i, (i==numberOfButtons-2? true: false));
     numberToAdd++; 
   }
   
   numberToAdd += 2;
   xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-  buttons[numberOfButtons-1] = new Button2(xCoordinates, yCoordinates, buttonTexts[numberOfButtons-1], numberOfButtons-1);
+  buttons[numberOfButtons-1] = new Button2(xCoordinates, yCoordinates, buttonTexts[numberOfButtons-1], numberOfButtons-1, true);
 
 
 
@@ -429,7 +437,7 @@ public void loadResources(){
   avatars[2].makeMainAvatar();
   
     screen3buttons = new Button2[2];
-    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 0);
-    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 1);
+    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 0, false);
+    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 1, false);
    
 }
