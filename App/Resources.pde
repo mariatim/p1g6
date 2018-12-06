@@ -136,8 +136,8 @@ public Button2(float xCoordinates, float yCoordinates, String text, int id, bool
   this.id = id; 
   if (revertedColors){
     buttonColor = new color[]{
-      color(yellow),
-      color(blue)
+      color(pink),
+      color(yellow)
     };
   }else{
     buttonColor = new color[]{
@@ -158,7 +158,7 @@ public void show(){
 }
 
 private void showText(){
-  fill(purple);
+  fill(white);
   textSize(15);
   textAlign(CENTER, CENTER);
   text(buttonText, xCoordinates, yCoordinates, size, size);
