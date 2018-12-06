@@ -361,14 +361,20 @@ public void loadResources(){
     "Demo"
   };
   
-  int numberToAdd = -2; 
-  for(int i = 0; i < numberOfButtons; i++){
-    int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-    int yCoordinates = height - rectSize;
+  int numberToAdd = -3;
+  int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
+  int yCoordinates = height - rectSize;
+
+  for(int i = 0; i < numberOfButtons-1; i++){
+    xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
     buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i);
     numberToAdd++; 
   }
- 
+  
+  numberToAdd += 2;
+  xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
+  buttons[numberOfButtons-1] = new Button2(xCoordinates, yCoordinates, buttonTexts[numberOfButtons-1], numberOfButtons-1);
+
 
 
 /**
