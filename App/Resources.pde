@@ -257,9 +257,14 @@ public void showPopUp(){
   this.yCoordinates = yCoordinates;
   this.name = name; 
   this.isMainAvatar = false;
-  for (PImage image : picture){
-    image.resize(300, 200);
+  for (int i = 0; i < picture.length; i++){
+    if ((i == picture.length - 1) && (picture[i] != null)){
+        picture[i].resize(350, 200);
+    } else if (picture[i] != null){
+        picture[i].resize(300, 200);
+    }
   }
+
   }
   
   public void showAndBlink(){
@@ -280,7 +285,7 @@ public void showPopUp(){
   private void showName(){
     textSize(20);
     fill(white);
-    text(name, xCoordinates + 110, yCoordinates + 30); //+90 because the picture is not cropped
+    text(name, xCoordinates + 140, yCoordinates + 30); //+90 because the picture is not cropped
   }
   
   private void makeMainAvatar(){
@@ -398,24 +403,25 @@ public void loadResources(){
   avatar1 = new PImage[]{
     loadImage("pics/screen3/avatars/A1_1.png"),
     loadImage("pics/screen3/avatars/A1_2.png"),
-    loadImage("pics/screen3/commentBox1.png")
+    loadImage("pics/screen3/comment_1.png")
   };
   
   avatar2 = new PImage[]{
     loadImage("pics/screen3/avatars/A2_1.png"),
     loadImage("pics/screen3/avatars/A2_2.png"),
-    loadImage("pics/screen3/commentBox1.png")
+    loadImage("pics/screen3/comment_2.png")
   };
   
   avatar3 = new PImage[]{
     loadImage("pics/screen3/avatars/A3_1.png"),
-    loadImage("pics/screen3/avatars/A3_2.png")
+    loadImage("pics/screen3/avatars/A3_2.png"),
+    null
   };
   
   avatar4 = new PImage[]{
     loadImage("pics/screen3/avatars/A4_1.png"),
     loadImage("pics/screen3/avatars/A4_2.png"),
-    loadImage("pics/screen3/commentBox1.png")
+    loadImage("pics/screen3/comment_3.png")
   };
   
   menuScreen3 = loadImage("pics/screen3/rect.png");
