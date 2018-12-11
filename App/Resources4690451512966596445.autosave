@@ -6,7 +6,6 @@
 ArrayList<circle> circles; //uses array list since, we don't know how long the array should be
 ArrayList<PVector> spots;//to make sure the circles have some where to go, PVector stores x and y spots
 PImage text; //calls variable which will contain a picture
-button button;
 
 int attempts=0;
 
@@ -74,36 +73,29 @@ class button{
   boolean click;
   int x=width/2;
   int y=height/2+200;
-  int r=205;
-   float red=90;
-  float green=90;
+  int r=100;
   
  button(){
    
  }
   
   
-  void display(){
-    float Red=noise(red);
-    float Green=noise(green);
+  void show(){
     noFill();
-    stroke(Red*red,Green*green,00);
+    stroke(yellow);
     strokeWeight(15);
   ellipse(x,y,r,r);
-  //stroke(Red*red,Green*green,00);
-  textSize(25);
-  text("click anywhere",x-87,y);
-  red+=Red/3;
-   green+=Green/3;
+  textSize(15);
+  text("click here",x-32,y);
   }
   
-  /*void pressed(){
+  void pressed(){
   if(mouseX==x+r/2||mouseY==y+r/2&&mousePressed==true){
     //if(mousePressed==true){
     rect(x,y,width/2,height/2);
     //}
   }
-  }*/
+  }
   /*void mouseClicked(){
   if(dist(mouseX,mouseY,x,y) <= r/2&&click == false){
     click=true;
@@ -136,24 +128,16 @@ private color[] buttonColor;
 private String buttonText;
 private int id;
 
-public Button2(float xCoordinates, float yCoordinates, String text, int id, boolean revertedColors){
+public Button2(float xCoordinates, float yCoordinates, String text, int id){
   this.xCoordinates = xCoordinates; 
   this.yCoordinates = yCoordinates; 
   size = 90;
   buttonText = text;
   this.id = id; 
-  if (revertedColors){
-    buttonColor = new color[]{
-      color(pink),
-      color(yellow)
-    };
-  }else{
-    buttonColor = new color[]{
-      color(blue),
-      color(yellow)
-    };
-  }
-  
+  buttonColor = new color[]{
+    color(blue),
+    color(yellow)
+  };
 }
 
 public void show(){
@@ -166,7 +150,7 @@ public void show(){
 }
 
 private void showText(){
-  fill(white);
+  fill(purple);
   textSize(15);
   textAlign(CENTER, CENTER);
   text(buttonText, xCoordinates, yCoordinates, size, size);
@@ -265,14 +249,9 @@ public void showPopUp(){
   this.yCoordinates = yCoordinates;
   this.name = name; 
   this.isMainAvatar = false;
-  for (int i = 0; i < picture.length; i++){
-    if ((i == picture.length - 1) && (picture[i] != null)){
-        picture[i].resize(350, 200);
-    } else if (picture[i] != null){
-        picture[i].resize(300, 200);
-    }
+  for (PImage image : picture){
+    image.resize(300, 200);
   }
-
   }
   
   public void showAndBlink(){
@@ -293,7 +272,7 @@ public void showPopUp(){
   private void showName(){
     textSize(20);
     fill(white);
-    text(name, xCoordinates + 140, yCoordinates + 30); //+90 because the picture is not cropped
+    text(name, xCoordinates + 110, yCoordinates + 30); //+90 because the picture is not cropped
   }
   
   private void makeMainAvatar(){
@@ -344,7 +323,6 @@ public void loadResources(){
 /**
 ## Screen 1 ##
 **/
-button=new button();
  spots= new ArrayList<PVector>();
  text=loadImage("pics/screen1/p1_text3.png"); //sets in the picture, is is not shown, but the pixels are read, so the circles know where to go
  text.loadPixels();//to read the pixels of the image
@@ -360,7 +338,6 @@ button=new button();
  }
  }
  circles= new ArrayList<circle>();
-  
 
 /**
 ## Screen 2 ##
@@ -384,20 +361,14 @@ button=new button();
     "Demo"
   };
   
-  int numberToAdd = -3;
-  int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-  int yCoordinates = height - rectSize;
-
-  for(int i = 0; i < numberOfButtons-1; i++){
-    xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-    buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i, (i==numberOfButtons-2? true: false));
+  int numberToAdd = -2; 
+  for(int i = 0; i < numberOfButtons; i++){
+    int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
+    int yCoordinates = height - rectSize;
+    buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i);
     numberToAdd++; 
   }
-  
-  numberToAdd += 2;
-  xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-  buttons[numberOfButtons-1] = new Button2(xCoordinates, yCoordinates, buttonTexts[numberOfButtons-1], numberOfButtons-1, true);
-
+ 
 
 
 /**
@@ -413,25 +384,24 @@ button=new button();
   avatar1 = new PImage[]{
     loadImage("pics/screen3/avatars/A1_1.png"),
     loadImage("pics/screen3/avatars/A1_2.png"),
-    loadImage("pics/screen3/comment_1.png")
+    loadImage("pics/screen3/commentBox1.png")
   };
   
   avatar2 = new PImage[]{
     loadImage("pics/screen3/avatars/A2_1.png"),
     loadImage("pics/screen3/avatars/A2_2.png"),
-    loadImage("pics/screen3/comment_2.png")
+    loadImage("pics/screen3/commentBox1.png")
   };
   
   avatar3 = new PImage[]{
     loadImage("pics/screen3/avatars/A3_1.png"),
-    loadImage("pics/screen3/avatars/A3_2.png"),
-    null
+    loadImage("pics/screen3/avatars/A3_2.png")
   };
   
   avatar4 = new PImage[]{
     loadImage("pics/screen3/avatars/A4_1.png"),
     loadImage("pics/screen3/avatars/A4_2.png"),
-    loadImage("pics/screen3/comment_3.png")
+    loadImage("pics/screen3/commentBox1.png")
   };
   
   menuScreen3 = loadImage("pics/screen3/rect.png");
@@ -453,7 +423,7 @@ button=new button();
   avatars[2].makeMainAvatar();
   
     screen3buttons = new Button2[2];
-    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 0, false);
-    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 1, false);
+    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 0);
+    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 1);
    
 }

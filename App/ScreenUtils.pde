@@ -34,6 +34,9 @@ private int currentScreen;
    background(blue);
    strokeWeight(1);
     
+    
+    
+     
   int total=50;//make 50 circles every frame
   int count=0;
   
@@ -44,6 +47,7 @@ private int currentScreen;
   circles.add(newc);   //adds the new circle
   count++;//the count will go up by one each time it makes a circle
   }
+ 
   //to not make it go in an infinte loop to fin new spots, there is made an if statement to stop the loop, when it can't find new circles after 1000 tries it stops making circles
   if(attempts>1000){ //when it takes 1000 tries and can't find any where to put 10 circles pr. frame it stops
   //noLoop();
@@ -51,6 +55,7 @@ private int currentScreen;
   println("FINISHED");
   break;
   }
+  
   }
   
   //if the a cricle is touching either the edge or antoher circle it stops growing
@@ -74,8 +79,9 @@ private int currentScreen;
   }
   c.show();//makes the circle display
   c.grow();//makes the circle grow
-  }
   
+  }
+button.display();
   }
   
   private void showScreen2(){
@@ -98,6 +104,6 @@ private int currentScreen;
       button.show();
     }  
   }
- 
+   
   
 }
