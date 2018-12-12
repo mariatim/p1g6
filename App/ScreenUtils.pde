@@ -18,6 +18,7 @@ private int currentScreen;
   
   public void nextScreen(){
   currentScreen = (currentScreen == 3)? 1 : currentScreen + 1; 
+  showPopUpNumber = -1;
   showScreen();
   }
   
