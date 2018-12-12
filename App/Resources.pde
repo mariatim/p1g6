@@ -124,7 +124,8 @@ private final String[] popUpTexts = {
   "Our vision \n Our vision is to combine AR and bibliotherapy. We want to make a tool, which relies on AR glasses and which allows patients to take notes about meaningful passages on their own, which could be shared with others during a therapist guided AR therapy session. Our hope is, that patients with social anxiety will benefit from bibliotherapy presented in an AR setting. This would give them a measure of anonymity, they would not have to leave their homes and they would hopefully feel more safe in this setting, but they would still be participating in therapist guided group therapy, centered around books, and therefore give them positive experiences with each other, as well as learn from the books they read.",
   "Social anxiety disorder \n Social anxiety disorder is a huge problem for the individual. Anxieties in general, including phobias, can become crippling handicaps if not properly treated, and some suffer from these irrational fears all of their life. Social anxiety disorder relates to the suffers' fear of other people, or other people's reactions to them, in a social capacity. There are a long list of symptoms ranging from physical discomforts to panic attacks.",
   "AR \n AR is short for Augmented Reality, and is the idea of layering an image of something unreal over a real image in real time. An example of an AR game would be Pokémon GO, in which the players physically walk around, get alerted to Pokémon nearby, and can see an animated Pokémon standing nearby them through their phone's camera, after which they can catch it. Another example could is MagicLeap, a pair of AR glasses, that let you see the real world through them, but overlayed with interactive elements. These come with a small remote, so you can doodle in AR while seeing the real world behind your doodle.",
-  "Bibliotherapy \n Bibliotherapy is a therapy form that relies on books. The idea is for the patient to be guided by a therapist to find relatable characters and passages in books pertaining to their issues and through this learn to cope with their own situation. An example would be, that if you are feeling socially awkward, you can read about a character, who is also socially awkward, but overcomes it in the book, and thereby learn from their experiences, or get enlightened about the fact, that there is a chance to get better."
+  "Bibliotherapy \n Bibliotherapy is a therapy form that relies on books. The idea is for the patient to be guided by a therapist to find relatable characters and passages in books pertaining to their issues and through this learn to cope with their own situation. An example would be, that if you are feeling socially awkward, you can read about a character, who is also socially awkward, but overcomes it in the book, and thereby learn from their experiences, or get enlightened about the fact, that there is a chance to get better.",
+  "This is how a user would read a book with AR glasses on. \n On the right, there is the user's avatar, and on top there are three other, representing other users that have read the book. \n Hover the mouse on top of the avatars to see userstats or comments. \n Use the buttons on the bottom to go back to the previous screen or to exit.\n Click anywhere to close this popup"
   };
 private Movie video;
 
@@ -183,11 +184,10 @@ if (isMouseOnButton()) {
 
 public int click(int currentPopUp){
   if (isMouseOnButton()) {
-    if (id == numberOfButtons - 1){ 
+    if ((id == numberOfButtons - 1) && (screenUtils.getCurrentScreen() == 2)){ 
       screenUtils.nextScreen();
-    }
-    if (id < popUpTexts.length){ 
-      return (currentPopUp == id)? -1 : id;  
+    } else if (id < popUpTexts.length){ 
+       return (currentPopUp == id)? -1 : id;  
     }
   } 
   return -1;
@@ -276,6 +276,8 @@ public void showPopUp(){
   }
   
   public void showAndBlink(){
+      frameRate(4);
+
   manageMainAvatar();
   randomNumber = (int) random(0, 100);
   if (randomNumber < 10){
@@ -367,7 +369,6 @@ button=new button();
 **/
 
   video = new Movie(this, "mov.mov");
- // video = new Movie(this, dataPath("pics/screen2/mov.mov"));
   video.loop();
   video.volume(0);
 
@@ -452,8 +453,10 @@ button=new button();
               
   avatars[2].makeMainAvatar();
   
-    screen3buttons = new Button2[2];
-    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 0, false);
-    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 1, false);
+    screen3buttons = new Button2[3];
+    screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 10, false);
+    screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 11, false);
+    screen3buttons[2] = new Button2(width/2 , height - rectSize, "Info", 4, true);
+
    
 }

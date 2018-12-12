@@ -95,11 +95,11 @@ button.display();
 }
 
   public void showScreen3(){
-    frameRate(4);
     image(screen3Background, 0, 0);
     for (Avatar avatar: avatars){
       avatar.showAndBlink();
     }
+    showPopUp();
     for (Button2 button : screen3buttons){
       button.show();
     }  
