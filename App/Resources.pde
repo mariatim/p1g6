@@ -72,29 +72,29 @@ circle newCircle(){
 }
 class button{
   boolean click;
-  int x=width/2;
-  int y=height/2+200;
-  int r=205;
-   float red=90;
+  int x = width/2;
+  int y = 3 * height/4;
+  float r=205;
+  float red=90;
   float green=90;
   
  button(){
    
  }
-  
-  
+    
   void display(){
     float Red=noise(red);
     float Green=noise(green);
     noFill();
     stroke(Red*red,Green*green,00);
-    strokeWeight(15);
-  ellipse(x,y,r,r);
-  //stroke(Red*red,Green*green,00);
-  textSize(25);
-  text("click anywhere",x-87,y);
-  red+=Red/3;
-   green+=Green/3;
+    strokeWeight(10);
+    ellipse(x,y,r,r);
+    //stroke(Red*red,Green*green,00);
+    textSize(25);
+    textAlign(CENTER);
+    text("click anywhere", x, y);
+    red+=Red/3;
+    green+=Green/3;
   }
   
   /*void pressed(){
