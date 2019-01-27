@@ -24,33 +24,33 @@ r=1;
 }
 
 void grow(){
-   
+
 if(growing){ //if the growing = true then the circle expands
 r=r+1; //makes the radius of the circle grow by 1
 }
 }
 
 boolean edges(){
-return(x+r>width||x-r<0||y+r>height||y-r<0);//if any of these statements is fulfilled it will return true and stop growing, since the boolean is false. 
+return(x+r>width||x-r<0||y+r>height||y-r<0);//if any of these statements is fulfilled it will return true and stop growing, since the boolean is false.
 
 }
-  
+
   void show(){ //draws the ellipse
     stroke(255);
     noFill();
   ellipse(x,y,r*2,r*2);
   }
-  
+
 }
 //makes a function which contains the same as the class for circle
 circle newCircle(){
-  
+
   int r=int(random(0,spots.size())); //makes the radius of the circles random, between 0 and within the parameters set in the top, which is it should be within the pixels of the picture
   PVector spot=spots.get(r); //get a spot out of the arraylist spot
-  
+
   float x= spot.x;               //x-position within the pixels of the picture                //random(width);
   float y= spot.y;               //y-postion within the pixels of the picture                //random(height);
-  
+
   boolean valid=true;           //makes the circles valid, to use to make sure a circle is not made inside another circle
   for(circle c: circles){
   float d= dist(x,y,c.x,c.y);  //the distance between the circles so they are not touching  meassures the distance of the x and y position between the circle and the picture
@@ -58,16 +58,16 @@ circle newCircle(){
     valid=false;
     break;
   }
-    
+
   }
-  
+
   if(valid){ // if the circle is valid then is will make a new circle
     return new circle(x,y); //find new places for circle if not then null(make no circles)
-    
+
   //circles.add(new circle(x,y));
   } else{
     attempts+=1;
-  return null;  
+  return null;
   }
 }
 class button{
@@ -77,11 +77,11 @@ class button{
   float r=205;
   float red=90;
   float green=90;
-  
+
  button(){
-   
+
  }
-    
+
   void display(){
     float Red=noise(red);
     float Green=noise(green);
@@ -96,7 +96,7 @@ class button{
     red+=Red/3;
     green+=Green/3;
   }
-  
+
   /*void pressed(){
   if(mouseX==x+r/2||mouseY==y+r/2&&mousePressed==true){
     //if(mousePressed==true){
@@ -107,18 +107,18 @@ class button{
   /*void mouseClicked(){
   if(dist(mouseX,mouseY,x,y) <= r/2&&click == false){
     click=true;
-   
+
   }*/
   }
-  
+
 
 /**
 ## Screen 2 ##
 **/
 
-public Button2[] buttons; 
+public Button2[] buttons;
 public int numberOfButtons;
-public int rectSize; 
+public int rectSize;
 public int showPopUpNumber;
 private final String[] popUpTexts = {
   "Our vision \n Our vision is to combine AR and bibliotherapy. We want to make a tool, which relies on AR glasses and which allows patients to take notes about meaningful passages on their own, which could be shared with others during a therapist guided AR therapy session. Our hope is, that patients with social anxiety will benefit from bibliotherapy presented in an AR setting. This would give them a measure of anonymity, they would not have to leave their homes and they would hopefully feel more safe in this setting, but they would still be participating in therapist guided group therapy, centered around books, and therefore give them positive experiences with each other, as well as learn from the books they read.",
@@ -129,7 +129,7 @@ private final String[] popUpTexts = {
   };
 private Movie video;
 
-public class Button2{
+public class Button2{ // helper class for buttons
 private float xCoordinates;
 private float yCoordinates;
 private int size;
@@ -137,12 +137,12 @@ private color[] buttonColor;
 private String buttonText;
 private int id;
 
-public Button2(float xCoordinates, float yCoordinates, String text, int id, boolean revertedColors){
-  this.xCoordinates = xCoordinates; 
-  this.yCoordinates = yCoordinates; 
+public Button2(float xCoordinates, float yCoordinates, String text, int id, boolean revertedColors){ // constructor
+  this.xCoordinates = xCoordinates;
+  this.yCoordinates = yCoordinates;
   size = 90;
   buttonText = text;
-  this.id = id; 
+  this.id = id;
   if (revertedColors){
     buttonColor = new color[]{
       color(pink),
@@ -154,10 +154,10 @@ public Button2(float xCoordinates, float yCoordinates, String text, int id, bool
       color(yellow)
     };
   }
-  
+
 }
 
-public void show(){
+public void show(){ // show (draw) button on the screen
   strokeWeight(3);
   rectMode(CORNER);
   stroke(yellow);
@@ -166,14 +166,14 @@ public void show(){
   showText();
 }
 
-private void showText(){
+private void showText(){ //show button text
   fill(white);
   textSize(15);
   textAlign(CENTER, CENTER);
   text(buttonText, xCoordinates, yCoordinates, size, size);
 }
 
-private void manageHover(){
+private void manageHover(){ // color button depending on whether the cursor is on top of the button or not
 if (isMouseOnButton()) {
     fill(buttonColor[1]);
   } else{
@@ -182,30 +182,30 @@ if (isMouseOnButton()) {
 }
 
 
-public int click(int currentPopUp){
+public int click(int currentPopUp){ // manage click for button
   if (isMouseOnButton()) {
-    if ((id == numberOfButtons - 1) && (screenUtils.getCurrentScreen() == 2)){ 
+    if ((id == numberOfButtons - 1) && (screenUtils.getCurrentScreen() == 2)){ // manage the last button of the second screen, which is changing the screen
       screenUtils.nextScreen();
-    } else if (id < popUpTexts.length){ 
-       return (currentPopUp == id)? -1 : id;  
+    } else if (id < popUpTexts.length){  // if there is a corresponding popup for the button id
+       return (currentPopUp == id)? -1 : id; // if the corresponding popup is already shown, remove it. else, show the corresponding popup. (remove the popup when you press on the same button a second time)
     }
-  } 
-  return -1;
+  }
+  return -1; // return -1 for no corresponding popup
 }
 
-private boolean isMouseOnButton(){
- if ((mouseX >= xCoordinates) && (mouseX <= (xCoordinates + size)) && 
+private boolean isMouseOnButton(){ // helper method; return true or false depending on whether the cursor is on the button or not
+ if ((mouseX >= xCoordinates) && (mouseX <= (xCoordinates + size)) &&
       (mouseY >= yCoordinates) && (mouseY <= yCoordinates+height)) {
       return true;
       } else {
-      return false; 
+      return false;
       }
 }
-  
+
 }
 
-public void showPopUp(){
-  if (showPopUpNumber != -1){
+public void showPopUp(){ // show/draw the corresponding popup text
+  if (showPopUpNumber != -1){ // don't show a popup for number -1
     strokeWeight(3);
     stroke(white);
     fill(white, 50);
@@ -227,55 +227,55 @@ public void showPopUp(){
 
   //background picture
   public PImage screen3Background;
-  
+
   //avatars
   public PImage[] avatar1;
-  
+
   public PImage[] avatar2;
-  
+
   public PImage[] avatar3;
-  
+
   public PImage[] avatar4;
-  
+
   public Avatar[] avatars;
-  
+
   public float[] avatarsXCoordinates;
-  
+
   public float[] avatarsYCoordinates;
-  
+
   public PImage menuScreen3;
-  
-  public PImage commentBox1; 
-  
+
+  public PImage commentBox1;
+
   public int randomNumber;
-  
+
   public Button2[] screen3buttons;
 
-  public class Avatar{
-    
-  private PImage[] picture;
+  public class Avatar{ // helper class for showing the avatars on the third screen
+
+  private PImage[] picture; // array of (3) pictures to be shown for the avatar (with the eyes open and closed and comment box)
   private float xCoordinates;
   private float yCoordinates;
-  private String name; 
-  private boolean isMainAvatar;
-  
-  public Avatar(PImage[] picture, float xCoordinates, float yCoordinates, String name){
+  private String name;
+  private boolean isMainAvatar; // there is only one main avatar on the screen (the user's avatar)
+
+  public Avatar(PImage[] picture, float xCoordinates, float yCoordinates, String name){ // constructor
   this.picture = picture;
   this.xCoordinates = xCoordinates;
   this.yCoordinates = yCoordinates;
-  this.name = name; 
+  this.name = name;
   this.isMainAvatar = false;
   for (int i = 0; i < picture.length; i++){
     if ((i == picture.length - 1) && (picture[i] != null)){
-        picture[i].resize(350, 200);
-    } else if (picture[i] != null){
-        picture[i].resize(300, 200);
+        picture[i].resize(350, 200); // resize the pictures
+    } else if (picture[i] != null){ // for the avatar's comments
+        picture[i].resize(300, 200); // resize the pictures
     }
   }
 
   }
-  
-  public void showAndBlink(){
+
+  public void showAndBlink(){ // show/"animate" avatar by alternating the two pictures
       frameRate(4);
 
   manageMainAvatar();
@@ -287,30 +287,30 @@ public void showPopUp(){
   }
     showName();
   }
-  
-  private void show(PImage image){
+
+  private void show(PImage image){ // show an image
     image(image, xCoordinates, yCoordinates);
   }
-  
-  private void showName(){
+
+  private void showName(){ // show name text
     textSize(20);
     fill(white);
     text(name, xCoordinates + 140, yCoordinates + 30); //+90 because the picture is not cropped
   }
-  
-  private void makeMainAvatar(){
+
+  private void makeMainAvatar(){ // method for making the main avatar
     isMainAvatar = true;
   }
-  
-  private void manageMainAvatar(){
-  if (isMainAvatar){
+
+  private void manageMainAvatar(){ // method for showing different things depending on the avatar is the main one or not
+  if (isMainAvatar){  // for showing the main avatar (different location on the screen, user stats)
     stroke(green);
     fill(green);
     ellipse(getCenterCoordinates()[0], getCenterCoordinates()[1], 120, 120);
     if (overCircle(getCenterCoordinates()[0], getCenterCoordinates()[1], 120)){
        showMainCharacterMenu();
     }
-  } else{
+  } else{  // for showing the other avatars
     strokeWeight(3);
     stroke(green);
     noFill();
@@ -319,29 +319,28 @@ public void showPopUp(){
        showComment();
     }
   }
-   
+
   }
-  
-  private void showMainCharacterMenu(){
+
+  private void showMainCharacterMenu(){ // show the menu (user stats) for the main character
    image(menuScreen3, getCenterCoordinates()[0] - 75, getCenterCoordinates()[1] + 40);
   }
-  
-  private void showComment(){
-    println("OVER!!!");
+
+  private void showComment(){ // show the avatar comment
     image(picture[2], width/32, 6*height/16);
   }
-  
-  private float[] getCenterCoordinates(){
+
+  private float[] getCenterCoordinates(){ //helper method to get the center coordinates when showinf the avatar (see the manageMainAvatar  and showMainCharacterMenu methods)
     return new float[]{xCoordinates + 140, yCoordinates + 100};
   }
-  
+
   }
-  
-  
+
+
 /**
 ## Load the resources ##
 **/
-  
+
 public void loadResources(){
 /**
 ## Screen 1 ##
@@ -353,7 +352,7 @@ button=new button();
   //a loop that looks at the pixels of the picture
  for(int x=0; x<text.width;x++){//to make it loop inside the pictures pixels on the x-position
  for(int y=0;y<text.height;y++){//to make it loop inside the pictures pixels on the y-posiiton
- int index=x+y*text.width;//the column + the row times how wide it is 
+ int index=x+y*text.width;//the column + the row times how wide it is
  color c=text.pixels[index];//registering the color within the parameters stated above
  float b=brightness(c);//extracts the brightness from the pixels in the picture
  if(b>1){
@@ -362,12 +361,13 @@ button=new button();
  }
  }
  circles= new ArrayList<circle>();
-  
+
 
 /**
 ## Screen 2 ##
 **/
 
+  //load and start the movie with no sound
   video = new Movie(this, "mov.mov");
   video.loop();
   video.volume(0);
@@ -376,7 +376,7 @@ button=new button();
   rectSize = 90;
   buttons = new Button2[5];
   showPopUpNumber = -1;
-  
+
   String[] buttonTexts = {
     "Our vision",
     "Social Anxiety Disorder",
@@ -384,20 +384,20 @@ button=new button();
     "Biblio therapy",
     "Demo"
   };
-  
+
   int numberToAdd = -3;
-  int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
+  int xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; // calculate the x coordinates for the specific buttons
   int yCoordinates = height - rectSize;
 
   for(int i = 0; i < numberOfButtons-1; i++){
-    xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
+    xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd;
     buttons[i] = new Button2(xCoordinates, yCoordinates, buttonTexts[i], i, (i==0? true: false));
-    numberToAdd++; 
+    numberToAdd++; // increase the numberToAdd variable in order to arrange the buttons at the right distance on the X axe
   }
-  
-  numberToAdd += 2;
-  xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd; 
-  buttons[numberOfButtons-1] = new Button2(xCoordinates, yCoordinates, buttonTexts[numberOfButtons-1], numberOfButtons-1, true);
+
+  numberToAdd += 2; // increase numberToAdd variable by two instead of one, to make the change about the gap between the first button group and the second
+  xCoordinates = width/2 - rectSize/2 + rectSize * numberToAdd;
+  buttons[numberOfButtons-1] = new Button2(xCoordinates, yCoordinates, buttonTexts[numberOfButtons-1], numberOfButtons-1, true); // display the last button further appart than the others
 
 
 
@@ -409,54 +409,55 @@ button=new button();
 
   //background picture
   screen3Background = loadImage("pics/screen3/background.jpg");
-  
-  //avatars
+
+  //load pictures for avatars
   avatar1 = new PImage[]{
     loadImage("pics/screen3/avatars/A1_1.png"),
     loadImage("pics/screen3/avatars/A1_2.png"),
     loadImage("pics/screen3/comment_1.png")
   };
-  
+
   avatar2 = new PImage[]{
     loadImage("pics/screen3/avatars/A2_1.png"),
     loadImage("pics/screen3/avatars/A2_2.png"),
     loadImage("pics/screen3/comment_2.png")
   };
-  
+
   avatar3 = new PImage[]{
     loadImage("pics/screen3/avatars/A3_1.png"),
     loadImage("pics/screen3/avatars/A3_2.png"),
     null
   };
-  
+
   avatar4 = new PImage[]{
     loadImage("pics/screen3/avatars/A4_1.png"),
     loadImage("pics/screen3/avatars/A4_2.png"),
     loadImage("pics/screen3/comment_3.png")
   };
-  
+
   menuScreen3 = loadImage("pics/screen3/rect.png");
   menuScreen3.resize(150, 300);
- 
-  
-  //Avatar 3 is the user's avatar
+
+
+  //create array of coordinates to be used for the avatars (the third one is for the main one)
   avatarsXCoordinates = new float[] {2 * width/8, 3 * width/8, 6 * width/8, 4 * width/8};
-  
+
   avatarsYCoordinates = new float[] {height/16, height/16, height/4, height/16};
-  
-  avatars = new Avatar[] {
-                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0], "Lucas"), 
-                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1], "Emilie"), 
+
+  avatars = new Avatar[] { // create the avatars; avatar 3 is the main avatar
+                new Avatar(avatar1, avatarsXCoordinates[0], avatarsYCoordinates[0], "Lucas"),
+                new Avatar(avatar2, avatarsXCoordinates[1], avatarsYCoordinates[1], "Emilie"),
                 new Avatar(avatar3, avatarsXCoordinates[2], avatarsYCoordinates[2], "Milla"),
                 new Avatar(avatar4, avatarsXCoordinates[3], avatarsYCoordinates[3], "Rasmus")
               };
-              
-  avatars[2].makeMainAvatar();
-  
+
+  avatars[2].makeMainAvatar(); // make the third avatar main (user's) avatar
+
+    // create the buttons for screen 3, inside an array of type Button2
     screen3buttons = new Button2[3];
     screen3buttons[0] = new Button2(0, height - rectSize, "<<<", 10, false);
     screen3buttons[1] = new Button2(width - rectSize , height - rectSize, ">>>", 11, false);
     screen3buttons[2] = new Button2(width/2 , height - rectSize, "Info", 4, true);
 
-   
+
 }
